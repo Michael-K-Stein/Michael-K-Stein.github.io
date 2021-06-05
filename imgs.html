@@ -2,8 +2,9 @@
 <pre id="file-content"></pre>
 <input id="xor_string" type="text" value="xor key" onkeyup="Imgify()">
 <button id="imgify" onClick="Imgify()">Imgify</button>
+<!--<button id="vidify" onClick="Vidify()">Vidify</button>-->
 <img id="img1" src=""></img>
-<video controls><source type="video/mp4" id="vid1" src=""></source>
+<!--<video controls><source type="video/mp4" id="vid1" src=""></video>-->
 
 <script>
 
@@ -35,6 +36,15 @@ function Xor_StringKey(arr, xor_key) {
 		SRC3 = Xor_StringKey(SRC2, xor_key_string);
 		SRC4 = _arrayBufferToBase64(SRC3);
 		document.getElementById("img1").src = "data:image/png;base64," + SRC4;
+	}
+
+	function Vidify() {
+		xor_key_string = document.getElementById("xor_string").value;
+		
+		SRC = document.getElementById("file-content").innerHTML;
+		SRC2 = _base64ToArrayBuffer(SRC);
+		SRC3 = Xor_StringKey(SRC2, xor_key_string);
+		SRC4 = _arrayBufferToBase64(SRC3);
 		document.getElementById("vid1").src = "data:video/mp4;base64," + SRC4;
 	}
 
