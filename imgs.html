@@ -1,6 +1,6 @@
 <input type="file" id="file-input" />
 <pre id="file-content"></pre>
-<input id="xor_string" type="text" value="xor key">
+<input id="xor_string" type="text" value="xor key" onkeyup="Imgify()">
 <button id="imgify" onClick="Imgify()">Imgify</button>
 <img id="img1" src=""></img>
 
@@ -76,5 +76,11 @@ function Xor_StringKey(arr, xor_key) {
 
 	document.getElementById('file-input')
 	  .addEventListener('change', readSingleFile, false);
+	  
+	document.getElementById('file-input')
+	  .addEventListener('change', Imgify, false);
+	  
+	document.getElementById('xor_string')
+	  .addEventListener('change', Imgify, false);
 
 </script>
