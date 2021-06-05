@@ -9,7 +9,7 @@
 function Xor_StringKey(arr, xor_key) {
 		n_xor_key = []
 		for (var i = 0; i < xor_key.length; i++) {
-			n_xor_key[i] = xor_key.charCodeAt(i);
+			n_xor_key[i] = xor_key.charCodeAt(i)%256;
 		}
 		return Xor(new Uint8Array(arr), n_xor_key);
 	}
