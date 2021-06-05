@@ -1,0 +1,80 @@
+<input type="file" id="file-input" />
+<pre id="file-content"></pre>
+<input id="xor_string" type="text" value="xor key">
+<button id="imgify" onClick="Imgify()">Imgify</button>
+<img id="img1" src=""></img>
+
+<script>
+
+function Xor_StringKey(arr, xor_key) {
+		n_xor_key = []
+		for (var i = 0; i < xor_key.length; i++) {
+			n_xor_key[i] = xor_key.charCodeAt(i);
+		}
+		return Xor(new Uint8Array(arr), n_xor_key);
+	}
+	
+	function Xor(arr, xor_key) {
+		new_arr = [];
+	
+		var xor_key_byte_ind = 0;
+		for (var ind = 0; ind < arr.length; ind++) {
+			new_arr[ind] = arr[ind] ^ xor_key[xor_key_byte_ind];
+			xor_key_byte_ind = (xor_key_byte_ind+1)%xor_key.length;
+		}
+		
+		return new_arr;
+	}
+
+	function Imgify() {
+		xor_key_string = document.getElementById("xor_string").value;
+		
+		SRC = document.getElementById("file-content").innerHTML;
+		SRC2 = _base64ToArrayBuffer(SRC);
+		SRC3 = Xor_StringKey(SRC2, xor_key_string);
+		SRC4 = _arrayBufferToBase64(SRC3);
+		document.getElementById("img1").src = "data:image/png;base64," + SRC4;
+	}
+
+	function _base64ToArrayBuffer(base64) {
+		var binary_string = window.atob(base64);
+		var len = binary_string.length;
+		var bytes = new Uint8Array(len);
+		for (var i = 0; i < len; i++) {
+			bytes[i] = binary_string.charCodeAt(i);
+		}
+		return bytes.buffer;
+	}
+
+	function _arrayBufferToBase64( buffer ) {
+		var binary = '';
+		var bytes = new Uint8Array( buffer );
+		var len = bytes.byteLength;
+		for (var i = 0; i < len; i++) {
+			binary += String.fromCharCode( bytes[ i ] );
+		}
+		return window.btoa( binary );
+	}
+
+	function readSingleFile(e) {
+	  var file = e.target.files[0];
+	  if (!file) {
+		return;
+	  }
+	  var reader = new FileReader();
+	  reader.onload = function(e) {
+		var contents = e.target.result;
+		displayContents(contents);
+	  };
+	  reader.readAsBinaryString(file);
+	}
+
+	function displayContents(contents) {
+	  var element = document.getElementById('file-content');
+	  element.textContent = contents;
+	}
+
+	document.getElementById('file-input')
+	  .addEventListener('change', readSingleFile, false);
+
+</script>
