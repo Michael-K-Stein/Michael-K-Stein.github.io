@@ -1,8 +1,11 @@
 <script src="MD5.js"></script>
 
 <script>
-  function Enc() {
-    document.getElementById("e").innerHTML = MD5("IDL");
+  function Login() {
+    var username = document.getElementById("Username").innerHTML;
+    var password = document.getElementById("Password").innerHTML;
+    var key = document.getElementById("Key").innerHTML;
+    document.getElementById("e").innerHTML = MD5(password);
   }
 </script>
 
@@ -13,6 +16,6 @@
 <input name="Key" id="Key" type="text" value="Key">
 <br>
 
-<button onClick="Enc()" value="Enc">enc</button>
+<button onClick="Login()" value="Enc">enc</button>
   
 <p id="e">abc</p>
