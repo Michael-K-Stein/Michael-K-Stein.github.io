@@ -2,18 +2,18 @@
 
 <script>
   function Login() {
-    var username = document.getElementById("Username").innerHTML;
-    var password = document.getElementById("Password").innerHTML;
-    var key = document.getElementById("Key").innerHTML;
+    var username = document.getElementById("Username").value;
+    var password = document.getElementById("Password").value;
+    var key = document.getElementById("Key").value;
     document.getElementById("e").innerHTML = MD5(password);
   }
 </script>
 
-<input name="Username" id="Username" type="text" value="Username"></input>
+<input name="Username" id="Username" type="text" value="Username">
 <br>
-<input name="Password" id="Password" type="text" value="Password"></input>
+<input name="Password" id="Password" type="text" value="Password">
 <br>
-<input name="Key" id="Key" type="text" value="Key"></input>
+<input name="Key" id="Key" type="text" value="Key">
 <br>
 
 <button onClick="Login()" value="Enc">enc</button>
