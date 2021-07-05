@@ -16,7 +16,7 @@
 
 <form action="http://84.229.57.13:8080">
   <input name="Action" id="Action" type="hidden" value="LOGIN">
-  <input name="Username" id="Username" type="text" value="Username" onchange="enc_username()">
+  <input name="Username" id="Username" type="text" value="Username" onchange="enc_username();" onkeyup="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();">
   <input name="Enc Username" id="Enc Username" type="hidden" value="">
   <br>
   <input name="Password" id="Password" type="text" value="Password">
@@ -26,6 +26,6 @@
   <input type="submit">
 </form>
 
-<button onClick="Login()" value="Enc">enc</button>
+<button onClick="Login();" value="Enc">enc</button>
   
 <p id="e">abc</p>
