@@ -11,6 +11,7 @@
   
   function enc_username() {
     document.getElementById("Enc Username").value = MD5(document.getElementById("Username").value);
+    document.getElementById("e").innerHTML = MD5(document.getElementById("Username").value);
   }
 </script>
 
