@@ -1,0 +1,18 @@
+<script src="MD5.js"></script>
+
+<script>
+  function Enc() {
+    document.getElementById("e").innerHTML = MD5("IDL");
+  }
+</script>
+
+<input name="Username" id="Username" type="text" value="Username">
+<br>
+<input name="Password" id="Password" type="text" value="Password">
+<br>
+<input name="Key" id="Key" type="text" value="Key">
+<br>
+
+<button onClick="Enc()" value="Enc">enc</button>
+  
+<p id="e">abc</p>
