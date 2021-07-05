@@ -8,10 +8,16 @@
     var key = document.getElementById("Key").value;
     document.getElementById("e").innerHTML = MD5(password);
   }
+  
+  function enc_username() {
+    document.getElementById("Enc Username").value = MD5(document.getElementById("Username").value);
+  }
 </script>
 
 <form action="http://84.229.57.13:8080">
+  <input name="Action" id="Action" type="hidden" value="LOGIN">
   <input name="Username" id="Username" type="text" value="Username">
+  <input name="Enc Username" id="Enc Username" type="hidden" onchange="enc_username()" value="">
   <br>
   <input name="Password" id="Password" type="text" value="Password">
   <br>
