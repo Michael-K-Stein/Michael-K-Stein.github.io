@@ -7,12 +7,19 @@
     var password = document.getElementById("Password").value;
     var key = document.getElementById("Key").value;
     document.getElementById("e").innerHTML = MD5(password);
-  }
+  };
   
   function enc_username() {
     document.getElementById("Enc Username").value = MD5(document.getElementById("Username").value);
-    document.getElementById("e").innerHTML = MD5(document.getElementById("Username").value);
-  }
+  };
+  
+  function enc_key() {
+    document.getElementById("Key").value = MD5(document.getElementById("Key").value);
+  };
+  
+  function enc_password() {
+    document.getElementById("Password").value = MD5(document.getElementById("Password").value);
+  };
 </script>
 
 <form action="http://84.229.57.13:8080">
@@ -20,9 +27,11 @@
   <input name="Username" id="Username" type="text" value="Username" onchange="enc_username();" onkeyup="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();">
   <input name="Enc Username" id="Enc Username" type="hidden" value="">
   <br>
-  <input name="Password" id="Password" type="text" value="Password">
+  <input name="Password1" id="Password1" type="text" value="Password1" onchange="enc_password();" onkeyup="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();">
+  <input name="Password" id="Password" type="hidden" value="Password">
   <br>
-  <input name="Key" id="Key" type="text" value="Key">
+  <input name="Key1" id="Key1" type="text" value="Key1" onchange="enc_key();" onkeyup="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();">
+  <input name="Key" id="Key" type="hidden" value="Key">
   <br>
   <input type="submit">
 </form>
