@@ -1,25 +1,7 @@
 <script src="MD5.js"></script>
 <script src="TCP_CLIENT/webtcp-0.0.1.min.js"></script>
 
-<script>
-  
-  function Login() {
-    var username = document.getElementById("Username").value;
-    var password = document.getElementById("Password").value;
-    var key = document.getElementById("Key").value;
-    document.getElementById("e").innerHTML = MD5(password);
-    
-    var xhttp = new XMLHttpRequest();
-    
-    xhttp.onreadystatechange =function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("e").innerHTML = xhttp.responseText;
-    };
-    
-    xhttp.open("GET", "http://84.229.57.13:8080", true);
-    xhttp.send();
-  };
-  
+<script>  
   function enc_username() {
     document.getElementById("Enc Username").value = MD5(document.getElementById("Username").value);
   };
