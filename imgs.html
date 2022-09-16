@@ -1,3 +1,12 @@
+<style>
+	.dark 
+	{
+		background-color: rgba(11,11,11,0.9);
+		color: rgba(220,220,220,0.9);
+	}
+</style>
+<html class="dark">
+	<body>
 <input type="file" id="file-input" />
 <pre id="file-content"></pre>
 <input id="xor_string" type="text" value="xor key" onkeyup="Imgify()">
@@ -5,7 +14,8 @@
 <!--<button id="vidify" onClick="Vidify()">Vidify</button>-->
 <img id="img1" src=""></img>
 <!--<video controls><source type="video/mp4" id="vid1" src=""></video>-->
-
+	</body>
+</html>
 <script>
 
 function Xor_StringKey(arr, xor_key) {
