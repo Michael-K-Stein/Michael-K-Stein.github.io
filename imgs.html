@@ -10,11 +10,28 @@
 			.center
 			{
 				text-align: center;
+				align-items: center;
 			}
 			
+			.small-image
+			{
+				border-radius: 0.1vh;
+				margin: 0.1vh;
+				height: 5vh;
+			}
+
+			.grid-imgs
+			{
+				display: grid;
+				grid-template-columns: repeat(5, 1fr);
+				margin-left: 1vh;
+			}
+
 		</style>
 		
 		<script>
+
+let files_data = [];
 
 function Xor_StringKey(arr, xor_key) {
 		n_xor_key = []
@@ -38,12 +55,20 @@ function Xor_StringKey(arr, xor_key) {
 
 	function Imgify() {
 		xor_key_string = document.getElementById("xor_string").value;
-		
-		SRC = document.getElementById("file-content").innerHTML;
-		SRC2 = _base64ToArrayBuffer(SRC);
-		SRC3 = Xor_StringKey(SRC2, xor_key_string);
-		SRC4 = _arrayBufferToBase64(SRC3);
-		document.getElementById("img1").src = "data:image/png;base64," + SRC4;
+		document.getElementById("imgs").innerHTML = "";
+
+		for (let i = 0; i < files_data.length; ++i)
+		{
+			let SRC = _arrayBufferToBase64(Xor_StringKey(_base64ToArrayBuffer(files_data[i]), xor_key_string));
+
+			let img = document.createElement('img');
+
+			img.src = "data:image/png;base64," + SRC;
+			img.classList = ["small-image"];
+			img.onclick = () => { document.getElementById('big-image').src = event.target.src; };
+
+			document.getElementById("imgs").appendChild(img);
+		}
 	}
 
 	function Vidify() {
@@ -76,36 +101,36 @@ function Xor_StringKey(arr, xor_key) {
 		return window.btoa( binary );
 	}
 
-	function readSingleFile(e) {
-	  var file = e.target.files[0];
-	  if (!file) {
-		return;
-	  }
-	  var reader = new FileReader();
-	  reader.onload = function(e) {
-		var contents = e.target.result;
-		displayContents(contents);
-	  };
-	  reader.readAsBinaryString(file);
-	}
-
-	function displayContents(contents) {
-	  var element = document.getElementById('file-content');
-	  element.textContent = contents;
+	function readFiles(event) {
+		files_data = [];
+		for (let i = 0; i < document.getElementById('file-input').files.length; ++i)
+		{
+			var file = document.getElementById('file-input').files[i];
+			if (!file) {
+				return;
+			}
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				var contents = e.target.result;
+				files_data.push(contents);
+			};
+			reader.readAsBinaryString(file);
+		}
 	}
 
 </script>
 	</head>
 	
 	<body class="dark center" style="width: 100%; height: 100%;">
-	<input class="dark" type="file" id="file-input" onchange="readSingleFile();"/>
-	<pre id="file-content"></pre>
-	<input class="dark" id="xor_string" type="text" value="xor key" ontypedkey="Imgify()">
+	<input class="dark" type="file" id="file-input" onchange="readFiles();" multiple/>
+	<input class="dark" id="xor_string" type="text" value="xor key">
 	<button  class="dark" id="imgify" onClick="Imgify()">Imgify</button>
 	<!--<button id="vidify" onClick="Vidify()">Vidify</button>-->
-		<br>
-		<br>
-	<img id="img1" src=""></img>
-	<!--<video controls><source type="video/mp4" id="vid1" src=""></video>-->
+	<br>
+	<br>
+	<div id="imgs" class="grid-imgs">
+		
+	</div>
+		<img id="big-image" class="big-image" src=""/>
 	</body>
 </html>
