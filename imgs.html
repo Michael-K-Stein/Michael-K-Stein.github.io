@@ -32,6 +32,7 @@
 		<script>
 
 let files_data = [];
+let MAX_IMAGE_SIZE = 100 * 1024 * 1024;
 
 function Xor_StringKey(arr, xor_key) {
 		n_xor_key = []
@@ -106,8 +107,8 @@ function Xor_StringKey(arr, xor_key) {
 		for (let i = 0; i < document.getElementById('file-input').files.length; ++i)
 		{
 			var file = document.getElementById('file-input').files[i];
-			if (!file) {
-				return;
+			if (!file || file.size > MAX_IMAGE_SIZE) {
+				continue;
 			}
 			var reader = new FileReader();
 			reader.onload = function(e) {
